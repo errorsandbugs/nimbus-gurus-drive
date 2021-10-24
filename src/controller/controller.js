@@ -1,4 +1,5 @@
 
+
 const model= require("./../model/model");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -150,6 +151,34 @@ module.exports =  {
             data: results
           });
         });
+
+const nodemailer = require('nodemailer');
+
+
+let mailTransporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'kavinkr10@gmail.com',
+		pass: "1234567890"
+	}
+});
+
+let mailDetails = {
+	from: 'kavinkr10@gmail.com',
+	to: body.email,
+	subject: 'laptop',
+	text: results
+};
+
+mailTransporter.sendMail(mailDetails, function(err, data) {
+	if(err) {
+		console.log('Error Occurs');
+	} else {
+		console.log('Email sent successfully');
+	}
+});
+
       }    
       
 }
+
